@@ -18,7 +18,7 @@
               <input class="form-control form-control-lg" type="text" placeholder="Your Name" />
             </fieldset>
             <fieldset class="form-group">
-              <input v-model="user.email" class="form-control form-control-lg" type="text" placeholder="Email" />
+              <input v-model="user.email" class="form-control form-control-lg" type="email" placeholder="Email" />
             </fieldset>
             <fieldset class="form-group">
               <input v-model="user.password" class="form-control form-control-lg" type="password" placeholder="Password" />
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import request from '@/utils/request'
+import { login } from '@/api/user'
 
 export default {
   name: "LoginIndex",
@@ -52,12 +52,8 @@ export default {
   methods: {
     async onSubmit () {
       // 提交表单请求登录
-      const { data } = await request({
-        method: 'POST',
-        url: '/api/users/login',
-        data: {
-          user: this.user
-        }
+      const { data } = await login({
+        user: this.user
       })
 
       console.log(data)
