@@ -1,0 +1,15 @@
+[
+  {
+    "path": "/",
+    "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/layout",
+    "children": [
+      {
+        "path": "",
+        "name": "home",
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/home",
+        "_name": "_b7d343ba"
+      }
+    ],
+    "_name": "_03e9b924"
+  }
+]
