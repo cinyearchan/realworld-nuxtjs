@@ -20,6 +20,30 @@
         "name": "register",
         "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/login",
         "_name": "_4224a2b6"
+      },
+      {
+        "path": "/profile/:username",
+        "name": "profile",
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/profile",
+        "_name": "_99392c36"
+      },
+      {
+        "path": "/settings",
+        "name": "settings",
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/settings",
+        "_name": "_4a49e367"
+      },
+      {
+        "path": "/editor",
+        "name": "editor",
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/editor",
+        "_name": "_1b876c9e"
+      },
+      {
+        "path": "/article/:slug",
+        "name": "article",
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/article",
+        "_name": "_cba4a59c"
       }
     ],
     "_name": "_03e9b924"
