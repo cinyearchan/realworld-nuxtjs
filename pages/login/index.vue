@@ -17,15 +17,36 @@
 
           <form @submit.prevent="onSubmit">
             <fieldset class="form-group" v-if="!isLogin">
-              <input class="form-control form-control-lg" type="text" placeholder="Your Name" />
+              <input
+                v-model="user.username"
+                class="form-control form-control-lg"
+                type="text"
+                placeholder="Your Name"
+                required
+              />
             </fieldset>
             <fieldset class="form-group">
-              <input v-model="user.email" class="form-control form-control-lg" type="email" placeholder="Email" />
+              <input
+                v-model="user.email"
+                class="form-control form-control-lg"
+                type="email"
+                placeholder="Email"
+                required
+              />
             </fieldset>
             <fieldset class="form-group">
-              <input v-model="user.password" class="form-control form-control-lg" type="password" placeholder="Password" />
+              <input
+                v-model="user.password"
+                class="form-control form-control-lg"
+                type="password"
+                placeholder="Password"
+                required
+                minlength="8"
+              />
             </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right">{{ isLogin ? 'Sign in' : 'Sign up' }}</button>
+            <button
+              class="btn btn-lg btn-primary pull-xs-right"
+            >{{ isLogin ? 'Sign in' : 'Sign up' }}</button>
           </form>
         </div>
       </div>
@@ -34,44 +55,49 @@
 </template>
 
 <script>
-import { login } from '@/api/user'
+import { login, register } from "@/api/user";
 
 export default {
   name: "LoginIndex",
   computed: {
     isLogin() {
-      return this.$route.name === 'login'
-    }
+      return this.$route.name === "login";
+    },
   },
-  data () {
+  data() {
     return {
       user: {
-        email: '',
-        password: ''
+        username: "",
+        email: "",
+        password: "",
       },
-      errors: {} // 错误信息
-    }
+      errors: {}, // 错误信息
+    };
   },
   methods: {
-    async onSubmit () {
+    async onSubmit() {
       try {
         // 提交表单请求登录
-        const { data } = await login({
-          user: this.user
-        })
+        const { data } = this.isLogin
+          ? await login({
+              user: this.user,
+            })
+          : await register({
+              user: this.user,
+            });
 
-        console.log(data)
+        console.log(data);
         // TODO: 保存用户的登录状态
 
         // 跳转到首页
-        this.$router.push('/')
+        this.$router.push("/");
       } catch (err) {
         // console.error('请求失败', err)
         // console.dir(err)
-        this.errors = err.response.data.errors
+        this.errors = err.response.data.errors;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
