@@ -5,6 +5,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _03e9b924 = () => interopDefault(import('../pages/layout' /* webpackChunkName: "" */))
 const _b7d343ba = () => interopDefault(import('../pages/home' /* webpackChunkName: "" */))
+const _4224a2b6 = () => interopDefault(import('../pages/login' /* webpackChunkName: "" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -29,6 +30,14 @@ export const routerOptions = {
       path: "",
       component: _b7d343ba,
       name: "home"
+    }, {
+      path: "/login",
+      component: _4224a2b6,
+      name: "login"
+    }, {
+      path: "/register",
+      component: _4224a2b6,
+      name: "register"
     }]
   }],
 

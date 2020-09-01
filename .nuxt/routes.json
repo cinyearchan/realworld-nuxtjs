@@ -8,6 +8,18 @@
         "name": "home",
         "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/home",
         "_name": "_b7d343ba"
+      },
+      {
+        "path": "/login",
+        "name": "login",
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/login",
+        "_name": "_4224a2b6"
+      },
+      {
+        "path": "/register",
+        "name": "register",
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/login",
+        "_name": "_4224a2b6"
       }
     ],
     "_name": "_03e9b924"
