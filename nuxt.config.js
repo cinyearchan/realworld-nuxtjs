@@ -56,6 +56,7 @@
      }
    },
    plugins: [
-     '~/plugins/request.js'
+     '~/plugins/request.js',
+     '~/plugins/dayjs.js'
    ]
  }
