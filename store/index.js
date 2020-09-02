@@ -33,6 +33,6 @@ export const actions = {
     }
 
     // 提交 mutation 修改 state 状态
-    commit('setAuth', user)
+    commit('setUser', user)
   }
 }
