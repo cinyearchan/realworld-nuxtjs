@@ -21,7 +21,7 @@
             </ul>
           </div>
 
-          <div class="article-preview">
+          <!-- <div class="article-preview">
             <div class="article-meta">
               <a href="profile.html">
                 <img src="http://i.imgur.com/Qr71crq.jpg" />
@@ -31,7 +31,7 @@
                 <span class="date">January 20th</span>
               </div>
               <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 29
+                <i class="ion-heart"></i> 
               </button>
             </div>
             <a href class="preview-link">
@@ -39,26 +39,26 @@
               <p>This is the description for the post.</p>
               <span>Read more...</span>
             </a>
-          </div>
+          </div> -->
 
-          <div class="article-preview">
+          <div class="article-preview" v-for="article in articles" :key="article.slug">
             <div class="article-meta">
-              <a href="profile.html">
-                <img src="http://i.imgur.com/N4VcUeJ.jpg" />
-              </a>
+              <nuxt-link :to="{ name: 'profile', params: { username: article.author.username } }">
+                <img :src="article.author.image" />
+              </nuxt-link>
               <div class="info">
-                <a href class="author">Albert Pai</a>
-                <span class="date">January 20th</span>
+                <nuxt-link :to="{ name: 'profile', params: { username: article.author.username } }" class="author">{{ article.author.username }}</nuxt-link>
+                <span class="date">{{ article.createdAt }}</span>
               </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 32
+              <button class="btn btn-outline-primary btn-sm pull-xs-right" :class="{ active: article.favorited }">
+                <i class="ion-heart"></i> {{ article.favoritesCount }}
               </button>
             </div>
-            <a href class="preview-link">
-              <h1>The song you won't ever stop singing. No matter how hard you try.</h1>
-              <p>This is the description for the post.</p>
+            <nuxt-link :to="{ name: 'article', params: { slug: article.slug } }" class="preview-link">
+              <h1>{{ article.title }}</h1>
+              <p>{{ article.description }}</p>
               <span>Read more...</span>
-            </a>
+            </nuxt-link>
           </div>
         </div>
 
@@ -84,8 +84,18 @@
 </template>
 
 <script>
+import { getArticles } from "@/api/article";
+
 export default {
   name: "HomeIndex",
+  async asyncData() {
+    const { data } = await getArticles()
+    // console.log(data)
+    return {
+      articles: data.articles,
+      articlesCount: data.articlesCount
+    }
+  },
 };
 </script>
 
