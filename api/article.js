@@ -38,6 +38,6 @@ export const deleteFavorite = slug => {
 export const getArticle = slug => {
   return request({
     method: 'GET',
-    url: `/api/article/${slug}`
+    url: `/api/articles/${slug}`
   })
 }
