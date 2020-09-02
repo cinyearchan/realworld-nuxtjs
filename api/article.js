@@ -8,3 +8,12 @@ export const getArticles  = params => {
     params
   })
 }
+
+// 获取关注文章列表
+export const getYourFeedArticles = params => {
+  return request({
+    method: 'GET',
+    url: '/api/articles/feed',
+    params
+  })
+}

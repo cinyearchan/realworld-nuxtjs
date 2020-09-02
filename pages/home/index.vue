@@ -19,7 +19,7 @@
                 <nuxt-link class="nav-link" exact :class="{ active: tab === 'global_feed' }" :to="{ name: 'home' }">Global Feed</nuxt-link>
               </li>
               <li class="nav-item" v-if="tag">
-                <nuxt-link class="nav-link" exact :class="{ active: tab === 'global_feed' }" :to="{ name: 'home', query: { tab: 'tag', tag } }">{{ tag }}</nuxt-link>
+                <nuxt-link class="nav-link" exact :class="{ active: tab === 'tag' }" :to="{ name: 'home', query: { tab: 'tag', tag } }">{{ tag }}</nuxt-link>
               </li>
             </ul>
           </div>
@@ -48,7 +48,7 @@
           <nav>
             <ul class="pagination">
               <li class="page-item" :class="{ active: item === page }" v-for="item in totalPage" :key="item">
-                <nuxt-link :to="{ name: 'home', query: { page: item, tag: $route.query.tag } }" class="page-link">{{ item }}</nuxt-link>
+                <nuxt-link :to="{ name: 'home', query: { page: item, tag: $route.query.tag, tab } }" class="page-link">{{ item }}</nuxt-link>
               </li>
             </ul>
           </nav>
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { getArticles } from "@/api/article";
+import { getArticles, getYourFeedArticles } from "@/api/article";
 import { getTags } from "@/api/tag";
 import { mapState } from 'vuex';
 
@@ -80,8 +80,11 @@ export default {
     const limit = 2
     const tab = query.tab || 'global_feed'
     const tag = query.tag
+
+    const loadArticles = tab === 'global_feed' ? getArticles : getYourFeedArticles
+
     const [articleRes, tagRes] = await Promise.all([
-      getArticles({
+      loadArticles({
         limit,
         offset: (page - 1) * limit,
         tag
