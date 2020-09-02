@@ -54,5 +54,8 @@
          }
        ])
      }
-   }
+   },
+   plugins: [
+     '~/plugins/request.js'
+   ]
  }
