@@ -12,34 +12,17 @@
         <div class="col-md-9">
           <div class="feed-toggle">
             <ul class="nav nav-pills outline-active">
-              <li class="nav-item">
-                <a class="nav-link disabled" href>Your Feed</a>
+              <li class="nav-item" v-if="user">
+                <nuxt-link class="nav-link" exact :class="{ active: tab === 'your_feed' }" :to="{ name: 'home', query: { tab: 'your_feed' } }">Your Feed</nuxt-link>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href>Global Feed</a>
+                <nuxt-link class="nav-link" exact :class="{ active: tab === 'global_feed' }" :to="{ name: 'home' }">Global Feed</nuxt-link>
+              </li>
+              <li class="nav-item" v-if="tag">
+                <nuxt-link class="nav-link" exact :class="{ active: tab === 'global_feed' }" :to="{ name: 'home', query: { tab: 'tag', tag } }">{{ tag }}</nuxt-link>
               </li>
             </ul>
           </div>
-
-          <!-- <div class="article-preview">
-            <div class="article-meta">
-              <a href="profile.html">
-                <img src="http://i.imgur.com/Qr71crq.jpg" />
-              </a>
-              <div class="info">
-                <a href class="author">Eric Simons</a>
-                <span class="date">January 20th</span>
-              </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 
-              </button>
-            </div>
-            <a href class="preview-link">
-              <h1>How to build webapps that scale</h1>
-              <p>This is the description for the post.</p>
-              <span>Read more...</span>
-            </a>
-          </div> -->
 
           <div class="article-preview" v-for="article in articles" :key="article.slug">
             <div class="article-meta">
@@ -65,7 +48,7 @@
           <nav>
             <ul class="pagination">
               <li class="page-item" :class="{ active: item === page }" v-for="item in totalPage" :key="item">
-                <nuxt-link :to="{ name: 'home', query: { page: item } }" class="page-link">{{ item }}</nuxt-link>
+                <nuxt-link :to="{ name: 'home', query: { page: item, tag: $route.query.tag } }" class="page-link">{{ item }}</nuxt-link>
               </li>
             </ul>
           </nav>
@@ -76,7 +59,7 @@
             <p>Popular Tags</p>
 
             <div class="tag-list">
-              <nuxt-link to v-for="item in tags" :key="item" class="tag-pill tag-default">{{ item }}</nuxt-link>
+              <nuxt-link :to="{ name: 'home', query: { tab: 'tag', tag: item } }" v-for="item in tags" :key="item" class="tag-pill tag-default">{{ item }}</nuxt-link>
             </div>
           </div>
         </div>
@@ -88,17 +71,20 @@
 <script>
 import { getArticles } from "@/api/article";
 import { getTags } from "@/api/tag";
+import { mapState } from 'vuex';
 
 export default {
   name: "HomeIndex",
   async asyncData({ query }) {
     const page = Number.parseInt(query.page || 1)
     const limit = 2
-
+    const tab = query.tab || 'global_feed'
+    const tag = query.tag
     const [articleRes, tagRes] = await Promise.all([
       getArticles({
         limit,
-      offset: (page - 1) * limit
+        offset: (page - 1) * limit,
+        tag
       }),
       getTags()
     ])
@@ -111,15 +97,18 @@ export default {
       articlesCount,
       tags,
       limit,
-      page
+      page,
+      tab,
+      tag
     }
   },
   computed: {
+    ...mapState(['user']),
     totalPage() {
       return Math.ceil(this.articlesCount / this.limit)
     }
   },
-  watchQuery: ['page'],
+  watchQuery: ['page', 'tag', 'tab'],
 };
 </script>
 
