@@ -38,6 +38,9 @@
 export default {
   middleware: "authenticated",
   name: "SettingsIndex",
+  async asyncData() {
+    
+  }
 };
 </script>
 <style>

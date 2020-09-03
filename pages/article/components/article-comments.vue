@@ -26,12 +26,13 @@
         &nbsp;
         <nuxt-link :to="{ name: 'profile', params: { username: comment.author.username } }" class="comment-author">{{ comment.author.username }}</nuxt-link>
         <span class="date-posted">{{ comment.createdAt | date('MMM DD, YYYY') }}</span>
+        <span class="mod-options" v-if="comment.author.username === user.username" @click="() => {deleteComment(comment.id)}"><i class="ion-trash-a"></i></span>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { getComments } from "@/api/article"
+import { getComments, deleteComment } from "@/api/article"
 import { mapState } from "vuex"
 
 export default {
@@ -53,6 +54,13 @@ export default {
   async mounted() {
     const { data } = await getComments(this.article.slug)
     this.comments = data.comments
+  },
+  methods: {
+    async deleteComment(commentId) {
+      await deleteComment(this.article.slug, commentId)
+      const { data } = await getComments(this.article.slug)
+      this.comments = data.comments
+    }
   }
 };
 </script>

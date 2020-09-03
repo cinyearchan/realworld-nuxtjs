@@ -49,3 +49,11 @@ export const getComments = slug => {
     url: `/api/articles/${slug}/comments`
   })
 }
+
+// 删除文章评论
+export const deleteComment = (slug, commentId) => {
+  return request({
+    method: 'DELETE',
+    url: `/api/articles/${slug}/comments/${commentId}`
+  })
+}
