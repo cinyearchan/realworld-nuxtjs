@@ -28,16 +28,19 @@ jobs:
     
     # 提交静态文件
     - name: commit-gh-pages
+      with:
+        github_token: ${{ secrets.TOKEN }}
       run: |
         git config --global user.email cinyearchan@gmail.com
         git config --global user.name cinyearchan
         git add .
         git commit -m "update" -a
+        git push -u origin master
     
-    - name: Push-changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.TOKEN }}
+    # - name: Push-changes
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.TOKEN }}
 
     - name: Deploy-gh-pages
       uses: actions/setup-node@master
