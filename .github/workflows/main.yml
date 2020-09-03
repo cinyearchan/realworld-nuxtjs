@@ -13,18 +13,19 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    # 打包构建 Release
+    # 打包构建 Release & 生成 gh-pages 静态文件
     - name: Build
       uses: actions/setup-node@master
     - run: npm install
     - run: npm run build
+    - run: npm run generate:gh-pages
     - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json
 
     # 打包生成 github pages 静态文件
-    - name: Generate-gh-pages
-      uses: actions/setup-node@master
-    - run: npm install
-    - run: npm run generate:gh-pages
+    # - name: Generate-gh-pages
+    #   uses: actions/setup-node@master
+    # - run: npm install
+    # - run: npm run generate:gh-pages
     
     # 提交静态文件
     # - name: commit-gh-pages
@@ -77,7 +78,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@master
       env:
         ACCESS_TOKEN: ${{ secrets.TOKEN }}
-        BRANCHE: gt-pages
+        BRANCHE: gh-pages
         FOLDER: dist
 
     # 部署到服务器
