@@ -22,7 +22,7 @@ Vue.use(Router)
 
 export const routerOptions = {
   mode: 'history',
-  base: decodeURI('/'),
+  base: decodeURI('/realworld-nuxtjs/'),
   linkActiveClass: 'active',
   linkExactActiveClass: 'nuxt-link-exact-active',
   scrollBehavior,

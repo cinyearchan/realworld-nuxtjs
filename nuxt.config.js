@@ -4,6 +4,7 @@
 
 module.exports = {
   router: {
+    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/realworld-nuxtjs/' : '/',
     linkActiveClass: 'active',
     // 自定义路由表规则
     extendRoutes(routes, resolve) {

@@ -23,12 +23,14 @@ export const actions = {
     let user = null
 
     // 如果请求头中有 Cookie
-    if (req.headers.cookie) {
-      const parsed = cookieparser.parse(req.headers.cookie)
-      try {
-        user = JSON.parse(parsed.user)
-      } catch (err) {
-        // No valid cookie found
+    if (process.server) {
+      if (req && req.headers && req.headers.cookie) {
+        const parsed = cookieparser.parse(req.headers.cookie)
+        try {
+          user = JSON.parse(parsed.user)
+        } catch (err) {
+          // No valid cookie found
+        }
       }
     }
 
