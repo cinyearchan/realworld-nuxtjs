@@ -6,23 +6,28 @@
           <form>
             <fieldset>
               <fieldset class="form-group">
-                <input type="text" class="form-control form-control-lg" placeholder="Article Title" />
+                <input type="text" class="form-control form-control-lg" placeholder="Article Title" v-model="article.title" :disabled="editDisabled"/>
               </fieldset>
               <fieldset class="form-group">
-                <input type="text" class="form-control" placeholder="What's this article about?" />
+                <input type="text" class="form-control" placeholder="What's this article about?" v-model="article.description" :disabled="editDisabled"/>
               </fieldset>
               <fieldset class="form-group">
                 <textarea
                   class="form-control"
                   rows="8"
                   placeholder="Write your article (in markdown)"
+                  v-model="article.body"
                 ></textarea>
               </fieldset>
               <fieldset class="form-group">
-                <input type="text" class="form-control" placeholder="Enter tags" />
-                <div class="tag-list"></div>
+                <input type="text" class="form-control" placeholder="Enter tags" v-model="tag" @keydown.enter="addTag" :disabled="editDisabled"/>
+                <div class="tag-list">
+                  <span class="tag-default tag-pill" v-for="(tag, index) in article.tagList" :key="tag + index">
+                    <i class="ion-close-round" @click="removeTag(index)"></i>{{ tag }}
+                  </span>
+                </div>
               </fieldset>
-              <button class="btn btn-lg pull-xs-right btn-primary" type="button">Publish Article</button>
+              <button class="btn btn-lg pull-xs-right btn-primary" type="button" @click="addArticle" :disabled="editDisabled">Publish Article</button>
             </fieldset>
           </form>
         </div>
@@ -31,10 +36,47 @@
   </div>
 </template>
 <script>
+import { addArticle } from '@/api/article'
+
 export default {
   // 在路由匹配组件渲染之前会先执行中间件处理
   middleware: "authenticated",
   name: "EditorIndex",
+  async asyncData() {
+
+  },
+  data() {
+    return {
+      editDisabled: false,
+      tag: '',
+      article: {
+        title: '',
+        description: '',
+        body: '',
+        tagList: []
+      }
+    }
+  },
+  methods: {
+    addTag() {
+      this.article.tagList.push(this.tag)
+      this.tag = ''
+    },
+    removeTag(index) {
+      this.article.tagList.splice(index, 1)
+    },
+    async addArticle() {
+      try {
+        this.editDisabled = true
+        const { data } = await addArticle(this.article)
+        console.log('data', data)
+        const { article } = data
+        this.$router.push(`/article/${article.slug}`)
+      } catch (err) {
+        this.editDisabled = false
+      }
+    }
+  }
 };
 </script>
 <style>

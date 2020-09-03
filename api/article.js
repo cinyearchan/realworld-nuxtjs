@@ -82,3 +82,12 @@ export const deleteFollow = username => {
     url: `/api/profiles/${username}/follow`
   })
 }
+
+// 发布文章
+export const addArticle = article => {
+  return request({
+    method: 'POST',
+    url: '/api/articles',
+    data: { article }
+  })
+}
