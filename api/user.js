@@ -17,3 +17,20 @@ export const register = data => {
     data
   })
 }
+
+// 获取当前用户信息
+export const getCurrentUser = () => {
+  return request({
+    method: 'GET',
+    url: '/api/user'
+  })
+}
+
+// 更新用户设置信息
+export const updateSettings = data => {
+  return request({
+    method: 'PUT',
+    url: '/api/user',
+    data
+  })
+}
