@@ -78,7 +78,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@master
       env:
         ACCESS_TOKEN: ${{ secrets.TOKEN }}
-        BRANCHE: gh-pages
+        BRANCH: gh-pages
         FOLDER: dist
 
     # 部署到服务器
