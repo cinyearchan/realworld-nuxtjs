@@ -25,6 +25,9 @@ jobs:
       uses: actions/setup-node@master
     - run: npm install
     - run: npm run generate:gh-pages
+    - run: npm run deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
     # 发布 Release
     - name: Create Release
@@ -49,6 +52,14 @@ jobs:
         asset_path: ./release.tgz
         asset_name: release.tgz
         asset_content_type: application/x-tgz
+
+    # 部署到 github pages
+    - name: Deploy Github Pages
+      uses: JamesIves/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.TOKEN }}
+        BRANCHE: gt-pages
+        FOLDER: ./
 
     # 部署到服务器
     # - name: Deploy
