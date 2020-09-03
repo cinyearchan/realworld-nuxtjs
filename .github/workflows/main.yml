@@ -25,6 +25,22 @@ jobs:
       uses: actions/setup-node@master
     - run: npm install
     - run: npm run generate:gh-pages
+    
+    # 提交静态文件
+    - name: commit-gh-pages
+      run: |
+        git config --global user.email cinyearchan@gmail.com
+        git config --global user.name cinyearchan
+        git add .
+        git commit -m "update" -a
+    
+    - name: Push-changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.TOKEN }}
+
+    - name: Deploy-gh-pages
+      uses: action/setup-node@master
     - run: npm run deploy
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
@@ -54,7 +70,7 @@ jobs:
         asset_content_type: application/x-tgz
 
     # 部署到 github pages
-    - name: Deploy Github Pages
+    - name: Publish-Github-Pages
       uses: JamesIves/github-pages-deploy-action@master
       env:
         ACCESS_TOKEN: ${{ secrets.TOKEN }}
