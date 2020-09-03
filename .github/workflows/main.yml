@@ -13,12 +13,18 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    # 打包构建
+    # 打包构建 Release
     - name: Build
       uses: actions/setup-node@master
     - run: npm install
     - run: npm run build
     - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json
+
+    # 打包生成 github pages 静态文件
+    - name: Generate-gh-pages
+      uses: actions/setup-node@master
+    - run: npm install
+    - run: npm run generate:gh-pages
 
     # 发布 Release
     - name: Create Release
