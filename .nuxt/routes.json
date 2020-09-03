@@ -6,46 +6,38 @@
       {
         "path": "",
         "name": "home",
-        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/home",
-        "_name": "_b7d343ba"
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/home"
       },
       {
         "path": "/login",
         "name": "login",
-        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/login",
-        "_name": "_4224a2b6"
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/login"
       },
       {
         "path": "/register",
         "name": "register",
-        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/login",
-        "_name": "_4224a2b6"
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/login"
       },
       {
         "path": "/profile/:username",
         "name": "profile",
-        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/profile",
-        "_name": "_99392c36"
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/profile"
       },
       {
         "path": "/settings",
         "name": "settings",
-        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/settings",
-        "_name": "_4a49e367"
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/settings"
       },
       {
         "path": "/editor",
         "name": "editor",
-        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/editor",
-        "_name": "_1b876c9e"
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/editor"
       },
       {
         "path": "/article/:slug",
         "name": "article",
-        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/article",
-        "_name": "_cba4a59c"
+        "component": "/Users/cinyearchan/code/lagou/task/fed-e-task-03-03/code/realworld-nuxtjs/pages/article"
       }
-    ],
-    "_name": "_03e9b924"
+    ]
   }
 ]
