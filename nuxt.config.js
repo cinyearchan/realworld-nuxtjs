@@ -4,6 +4,20 @@
 
 module.exports = {
   head: {
+    title: 'realworld-nuxtjs',
+    htmlAttrs: {
+      lang: 'en',
+      amp: true
+    },
+    base: { href: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/realworld' : '' },
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: 'realworld-nuxtjs' }
+    ],
+    noscript: [
+      { innerHTML: 'This website requires JavaScript.' }
+    ],
     link: [
       // <!-- Import Ionicon icons & Google Fonts our Bootstrap theme relies on -->
       { rel: 'stylesheet', type: 'text/css', href: '//cdn.jsdelivr.net/npm/ionicons@2.0.1/css/ionicons.min.css' },
