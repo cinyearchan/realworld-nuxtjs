@@ -27,26 +27,26 @@ jobs:
     - run: npm run generate:gh-pages
     
     # 提交静态文件
-    - name: commit-gh-pages
-      with:
-        github_token: ${{ secrets.TOKEN }}
-      run: |
-        git config --global user.email cinyearchan@gmail.com
-        git config --global user.name cinyearchan
-        git add .
-        git commit -m "update" -a
-        git push -u origin master
+    # - name: commit-gh-pages
+    #   with:
+    #     github_token: ${{ secrets.TOKEN }}
+    #   run: |
+    #     git config --global user.email cinyearchan@gmail.com
+    #     git config --global user.name cinyearchan
+    #     git add .
+    #     git commit -m "update" -a
+    #     git push -u origin master
     
     # - name: Push-changes
     #   uses: ad-m/github-push-action@master
     #   with:
     #     github_token: ${{ secrets.TOKEN }}
 
-    - name: Deploy-gh-pages
-      uses: actions/setup-node@master
-    - run: npm run deploy
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+    # - name: Deploy-gh-pages
+    #   uses: actions/setup-node@master
+    # - run: npm run deploy
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
     # 发布 Release
     - name: Create Release
@@ -72,13 +72,13 @@ jobs:
         asset_name: release.tgz
         asset_content_type: application/x-tgz
 
-    # 部署到 github pages
+    # 发布到 github pages
     - name: Publish-Github-Pages
       uses: JamesIves/github-pages-deploy-action@master
       env:
         ACCESS_TOKEN: ${{ secrets.TOKEN }}
         BRANCHE: gt-pages
-        FOLDER: ./
+        FOLDER: dist
 
     # 部署到服务器
     # - name: Deploy
