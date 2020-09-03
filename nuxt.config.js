@@ -11,7 +11,7 @@ module.exports = {
       { rel: 'stylesheet', type: 'text/css', href: '//fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic' },
       // <link href="//fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
       // <!-- Import the custom Bootstrap 4 theme from our hosted CDN -->
-      { rel: 'stylesheet', type: 'text/css', href: process.env.DEPLOY_ENV === 'gh-pages' ? '/realworld-nuxtjs/index.css' : '/index.css' }
+      { rel: 'stylesheet', type: 'text/css', href: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/realworld-nuxtjs/index.css' : '/index.css' }
       // <link rel="stylesheet" href="{{ process.env.DEPLOY_ENV === 'gh-pages' ? '/realworld-nuxtjs/index.css' : '/index.css' }}"></link>
     ]
   },

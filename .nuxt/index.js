@@ -67,7 +67,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"link":[{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002Fionicons@2.0.1\u002Fcss\u002Fionicons.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Findex.css"}],"meta":[],"style":[],"script":[]},
+    head: {"link":[{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002Fionicons@2.0.1\u002Fcss\u002Fionicons.min.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002Frealworld-nuxtjs\u002Findex.css"}],"meta":[],"style":[],"script":[]},
 
     store,
     router,
