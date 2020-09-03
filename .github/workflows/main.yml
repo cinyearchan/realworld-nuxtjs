@@ -40,7 +40,7 @@ jobs:
         github_token: ${{ secrets.TOKEN }}
 
     - name: Deploy-gh-pages
-      uses: action/setup-node@master
+      uses: actions/setup-node@master
     - run: npm run deploy
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
