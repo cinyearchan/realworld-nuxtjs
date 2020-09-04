@@ -7,16 +7,25 @@
             <img :src="profile.image" class="user-img" />
             <h4>{{ profile.username }}</h4>
             <p>{{ profile.bio }}</p>
-            <button
-              class="btn btn-sm btn-outline-secondary action-btn"
-              :class="{ active: profile.following }"
-              @click="onFollow(profile)"
-              :disabled="profile.followDisabled"
-            >
-              <i class="ion-plus-round"></i>
-              &nbsp;
-              {{ profile.following ? 'Unfollow' : 'follow' }} {{ profile.username }}
-            </button>
+            <template v-if="profile.username !== user.username">
+              <button
+                class="btn btn-sm btn-outline-secondary action-btn"
+                :class="{ active: profile.following }"
+                @click="onFollow(profile)"
+                :disabled="profile.followDisabled"
+              >
+                <i class="ion-plus-round"></i>
+                &nbsp;
+                {{ profile.following ? 'Unfollow' : 'follow' }} {{ profile.username }}
+              </button>
+            </template>
+            <template v-else>
+              <nuxt-link class="btn btn-sm btn-outline-secondary action-btn" :to="{ name: 'settings' }">
+                <i class="ion-gear-a"></i>
+                &nbsp;
+                Edit Profile Settings
+              </nuxt-link>
+            </template>
           </div>
         </div>
       </div>
@@ -90,6 +99,7 @@
 
 <script>
 import { getProfile } from "@/api/user";
+import { mapState } from "vuex"
 import {
   getArticles,
   addFollow,
@@ -101,6 +111,9 @@ import {
 export default {
   middleware: "authenticated",
   name: "UserProfile",
+  computed: {
+    ...mapState(['user'])
+  },
   async asyncData({ query, params }) {
     const { data } = await getProfile(params.username);
     // console.log('data', data)
@@ -112,7 +125,7 @@ export default {
     const limit = 10;
     const tab = query.tab || "my_articles";
     // const tag = query.tag;
-    console.log('tab', tab)
+    console.log("tab", tab);
 
     const arg = {
       limit,
@@ -140,7 +153,7 @@ export default {
       tab,
     };
   },
-  watchQuery: ['page', 'tab'],
+  watchQuery: ["page", "tab"],
   methods: {
     async onFollow(profile) {
       profile.followDisabled = true;
@@ -167,15 +180,15 @@ export default {
       article.favoriteDisabled = false;
     },
     handleCurrentChange(page) {
-      this.page = page
+      this.page = page;
       this.$router.push({
         path: `/profile/${profile.username}`,
         query: {
           page: this.page,
-          tab: this.tab
-        }
-      })
-    }
+          tab: this.tab,
+        },
+      });
+    },
   },
 };
 </script>

@@ -57,7 +57,7 @@
               <button
                 class="btn btn-lg pull-xs-right btn-primary"
                 type="button"
-                @click="addArticle"
+                @click="publishArticle"
                 :disabled="editDisabled"
               >Publish Article</button>
             </fieldset>
@@ -68,23 +68,34 @@
   </div>
 </template>
 <script>
-import { addArticle } from "@/api/article";
+import { addArticle, getArticle, editArticle } from "@/api/article";
 
 export default {
   // 在路由匹配组件渲染之前会先执行中间件处理
   middleware: "authenticated",
   name: "EditorIndex",
-  async asyncData() {},
+  async asyncData({ query }) {
+    const slug = query.slug;
+    let article = {
+      title: "",
+      description: "",
+      body: "",
+      tagList: [],
+    };
+    if (slug) {
+      const { data } = await getArticle(slug);
+      article = data.article;
+    }
+
+    return {
+      slug,
+      article,
+    };
+  },
   data() {
     return {
       editDisabled: false,
       tag: "",
-      article: {
-        title: "",
-        description: "",
-        body: "",
-        tagList: [],
-      },
     };
   },
   methods: {
@@ -95,16 +106,16 @@ export default {
     removeTag(index) {
       this.article.tagList.splice(index, 1);
     },
-    async addArticle() {
+    async publishArticle() {
       try {
-        this.editDisabled = true;
-        const { data } = await addArticle(this.article);
-        console.log("data", data);
-        const { article } = data;
-        this.$router.push(`/article/${article.slug}`);
-      } catch (err) {
-        this.editDisabled = false;
-      }
+          this.editDisabled = true;
+          const { data } = this.slug ? await editArticle(this.slug, this.article) : await addArticle(this.article);
+          // console.log("data", data);
+          const { article } = data;
+          this.$router.push(`/article/${article.slug}`);
+        } catch (err) {
+          this.editDisabled = false;
+        }
     },
   },
 };

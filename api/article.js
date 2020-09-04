@@ -91,3 +91,20 @@ export const addArticle = article => {
     data: { article }
   })
 }
+
+// 编辑文章
+export const editArticle = (slug, article) => {
+  return request({
+    method: 'PUT',
+    url: `/api/articles/${slug}`,
+    data: article
+  })
+}
+
+// 删除文章
+export const deleteArticle = slug => {
+  return request({
+    method: 'DELETE',
+    url: `/api/articles/${slug}`
+  })
+}
